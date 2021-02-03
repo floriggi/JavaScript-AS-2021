@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Viseur</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="canvas">Cliquer dedans</div>
+
+    <script type="text/javascript">
+        const LARGEUR = 600;
+        const ESPACE = 4;
+
+        function estDansLeCanvas(x, y) {
+            return x > 0 && x < LARGEUR && y > 0 && y < LARGEUR;
+        }
+
+        document.getElementById('canvas').addEventListener('click', function (e) {
+            const coordonneeBordureGauche = this.offsetLeft;
+            const coordonneeBordureHaut = this.offsetTop;
+
+            const coordonneeDuCurseurX = e.pageX - coordonneeBordureGauche;
+            const coordonneeDuCurseurY = e.pageY - coordonneeBordureHaut;
+
+            console.log(coordonneeDuCurseurX, coordonneeDuCurseurY);
+            this.innerHTML = '';
+
+            // on affiche les points de haut en bas
+            for (let nbPoint = -LARGEUR / 2; nbPoint < LARGEUR / 2; nbPoint++) {
+                let x = coordonneeDuCurseurX; // le x ne change pas
+                let y = coordonneeDuCurseurY + (ESPACE * nbPoint);
+
+                if (estDansLeCanvas(x, y)) {
+                    let point = document.createElement('span');
+                    point.style.left = x + 'px';
+                    point.style.top = y + 'px';
+                    this.appendChild(point);
+                }
+            }
+
+            // on affiche les points de gauche à droite
+            for (let nbPoint = -LARGEUR / 2; nbPoint < LARGEUR / 2; nbPoint++) {
+                let x = coordonneeDuCurseurX + (ESPACE * nbPoint);
+                let y = coordonneeDuCurseurY; // le y ne change pas
+
+                if (estDansLeCanvas(x, y)) {
+                    let point = document.createElement('span');
+                    point.style.left = x + 'px';
+                    point.style.top = y + 'px';
+                    this.appendChild(point);
+                }
+            }
+
+            // on affiche la première diagonale
+            for (let nbPoint = -LARGEUR / 2; nbPoint < LARGEUR / 2; nbPoint++) {
+                let x = coordonneeDuCurseurX + (ESPACE * nbPoint);
+                let y = coordonneeDuCurseurY + (ESPACE * nbPoint);
+
+                if (estDansLeCanvas(x, y)) {
+                    let point = document.createElement('span');
+                    point.style.left = x + 'px';
+                    point.style.top = y + 'px';
+                    this.appendChild(point);
+                }
+            }
+
+            // on affiche la seconde diagonale
+            for (let nbPoint = -LARGEUR / 2; nbPoint < LARGEUR / 2; nbPoint++) {
+                let x = coordonneeDuCurseurX + (ESPACE * nbPoint);
+                let y = coordonneeDuCurseurY - (ESPACE * nbPoint);
+
+                if (estDansLeCanvas(x, y)) {
+                    let point = document.createElement('span');
+                    point.style.left = x + 'px';
+                    point.style.top = y + 'px';
+                    this.appendChild(point);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
