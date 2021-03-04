@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>TD5</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <style>
+        .list-group-item:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="container">
+        <h1>Gestion des étudiants</h1>
+
+        <div class="row">
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <ul id="etudiants" class="list-group">
+                    <li class="list-group-item">
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-6">
+                <h2>Détail étudiant</h2>
+
+                <form>
+                    <div class="form-group">
+                        <label for="prenom">Prénom</label>
+                        <input type="text" id="prenom" name="prenom" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="nom">Nom</label>
+                        <input type="text" id="nom" name="nom" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="ville">Ville</label>
+                        <input type="text" id="ville" name="ville" class="form-control">
+                    </div>
+
+                    <button type="button" class="btn">Enregistrer</button>
+                    <button type="button" class="btn btn-danger">Supprimer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const URL = 'http://localhost:9090/etudiants/';
+    </script>
+</body>
+</html>
